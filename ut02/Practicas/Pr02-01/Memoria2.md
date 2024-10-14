@@ -53,6 +53,7 @@ total 4
 drwxrwxr-x 2 vagrant vagrant 4096 Oct  1 07:44 dir21
 vagrant@ubuntu2204:~/pr0201/dir2$ 
 ```
+<<<<<<< HEAD
 NOTACIÓN OCTAL Y SIMBÓLICA: Partimos desde los permisos rw-r--r--
 -rwxrwxr-x : a+x,g+w
 rwxr--r-- : u+x
@@ -115,5 +116,9 @@ Para el usuario agg2 la contraseña es abcd
 
 ```
 ls
+=======
+NOTACIÓN OCTAL Y SIMBÓLICA
+-
+>>>>>>> d0aa6e3c7555618b751e4ebe887cf9c73920353c
 
 
