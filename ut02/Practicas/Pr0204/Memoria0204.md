@@ -32,6 +32,10 @@ vagrant@ubuntu2204:~$ cat /etc/crontab
 # and files in /etc/cron.d. These files also have username fields,   
 # that none of the other crontabs do.
 ```
+```bash
+vagrant@ubuntu2204:~$ ls /etc/crontab
+/etc/crontab
+```
 2. Ficheros controlados por los usuarios que pueden usar el contrab: el 
 fichero es: "cron.allow", sólo los usuarios que se encuentran en él pueden crear,
 editar, mostrar o eliminar Ficheros contrab
@@ -41,17 +45,17 @@ cat: /etc/cron.allow: No such file or directory
 vagrant@ubuntu2204:~$ cat /etc/cron.deny
 cat: /etc/cron.deny: No such file or directory
 ```
-1. Script.sh todos los lunes a las 07:30:  30 7 ** 1 /bin/
+3. Script.sh todos los lunes a las 07:30:  30 7 ** 1 /bin/
 ejecutar/script.sh
-1. Listar y cancelar tarea:  con el comando "ps" podemos viernes
+4. Listar y cancelar tarea:  con el comando "ps" podemos ver
 los procesos del sistema. Para suprimir el proceso usaremos el 
 comando "kill -9 pid"con esta orden se "mata" o suprime el proceso
 el 9 es el número de SIGKILL para matar el proceso y el pid
 es el identificador del proceso
-1. Ejecución comando ps -ef para root:  2**** root /tmp/ps_result
-2. Verificar la lista de tareas en contrab: tenemos dos comandos
+5. Ejecución comando ps -ef para root:  2**** root /tmp/ps_result
+6. Verificar la lista de tareas en contrab: tenemos dos comandos
 dependiendo de que usuario seamos:
 para un usuario normal:  contrab -l
 para el administrador: contrab -u (usuario) -l, de esta forma veremos
 las tareas de cualquier usuario
-1. 
+1.  

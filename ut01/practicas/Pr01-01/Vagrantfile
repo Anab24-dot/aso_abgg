@@ -10,7 +10,7 @@ Vagrant.configure("2") do |config|
     vb.name = "ubuntu server"
     vb.memory = 2048
     vb.cpus = 2
-  config.vm.synced_folder "data1/", "/data", create:true
+  config.vm.synced_folder "./compartida/", "/data", create:true
   end
   
   
