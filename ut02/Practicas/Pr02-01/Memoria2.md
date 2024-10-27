@@ -113,12 +113,111 @@ Iniciamos sesión con el usuario agg1, accedemos al directorio y creamos el fich
 Para el usuario agg1 la contraseña es 1234
 Para el usuario agg2 la contraseña es abcd
 ```bash
-
+$ cd /compartido
+$ pwd
+/compartido
+$
 ```
-ls
-=======
-NOTACIÓN OCTAL Y SIMBÓLICA
--
->>>>>>> d0aa6e3c7555618b751e4ebe887cf9c73920353c
+Al cambiar de usuario y movernos hasta el directorio compartido, tenemos el problema de no ver claramente el usuario y el directorio; el comando pwd nos ayuda a ver en que directorio nos encontramos
+```bash
+$ echo "Creamos un fichero para el usuario 1" > fichero1
+$ ls -l fichero1
+-rw-r--r-- 1 agg1 asir 37 Oct 27 17:07 fichero1
+```
+El archivo sí tiene como grupo propietario asir, esto es debido al bit setgid en el directorio
+Cambiamos ahora de usuario para comprobar si podemos ver el fichero1 creado en el usuario anterior.
+```bash
+$ su agg2
+Password: 
+$ cd /compartido
+$ ls -l
+total 4
+-rw-r--r-- 1 agg1 asir 37 Oct 27 17:07 fichero1
+```
+Añadimos contenido al fichero1, pero en este caso no se me permite porque no tengo permiso
+PREGUNTAS:
+- ¿Qué ventajas tiene usar el bit setgid en entornos colaborativos?: da la oportunidad de que todos los miembros de un grupo puedan tener acceso a los archivos y ficheros de otros usuarios del mismo grupo sin tener que dar más permisos
+- ¿Qué sucede si no se aplica el bit setgid en entornos colaborativos?: será necesario dar permisos cada poco, y habría limitaciones en el acceso y los cambios en los archivos por parte de otros usuarios del mismo grupo
+Para la eliminación de los usuarios, grupo y el directorio he tenido problemas, 
+no era posible eliminarlos. Después de varios intentos infructuosos reinicié la máquina y sí se habían eliminado los usuarios. Por tanto he  eliminado el resto
+```bash 
+vagrant@ubuntu2204:~$ sudo userdel -r agg1
+userdel: agg1 mail spool (/var/mail/agg1) not found
+userdel: agg1 home directory (/home/agg1) not found
+vagrant@ubuntu2204:~$ sudo userdel -r agg2
+userdel: agg2 mail spool (/var/mail/agg2) not found
+userdel: agg2 home directory (/home/agg2) not found
+vagrant@ubuntu2204:~$ sudo groupdel asir
+vagrant@ubuntu2204:~$ sudo rm -rf /compartido
+vagrant@ubuntu2204:~$ cat /etc/passwd
+```
+4. EL STICKY BIT
+```bash
+vagrant@ubuntu2204:~$ sudo mkdir /compartido
+vagrant@ubuntu2204:~$ sudo chmod 777 /compartido
+vagrant@ubuntu2204:~$ sudo adduser agg1
+Adding user `agg1' ...
+Adding new group `agg1' (1001) ...
+Adding new user `agg1' (1001) with group `agg1' ...
+Creating home directory `/home/agg1' ...
+Copying files from `/etc/skel' ...
+Is the information correct? [Y/n] y
+vagrant@ubuntu2204:~$ sudo adduser agg2
+Adding user `agg2' ...
+Adding new group `agg2' (1002) ...
+Adding new user `agg2' (1002) with group `agg2' ...
+Creating home directory `/home/agg2' ...
+Copying files from `/etc/skel' ...
+```
+En este caso creamos los usuarios con el comando adduser y vemos como resulta mas sencillo para ver en el usuario desde el que trabajamos.
+```bash
+vagrant@ubuntu2204:~$ su - agg1
+Password: 
+agg1@ubuntu2204:~$ cd /compartido
+agg1@ubuntu2204:/compartido$ touch fichero1
+agg1@ubuntu2204:/compartido$ echo "Que bien resulta ahora ver todo mas claro" > fichero1
+agg1@ubuntu2204:/compartido$ su - agg2
+Password: 
+agg2@ubuntu2204:~$ rm /compartido/fichero1
+rm: remove write-protected regular file '/compartido/fichero1'? y
+agg2@ubuntu2204:~$
+agg2@ubuntu2204:~$ ls -l
+total 0
+agg2@ubuntu2204:~$ ls /compartido
+agg2@ubuntu2204:~$ find /compartido -name "fichero1"
+agg2@ubuntu2204:~$ su - agg1
+Password: 
+agg1@ubuntu2204:~$ ls -l
+total 0
+agg1@ubuntu2204:~$
+```
+Vemos como el segundo usuario ha podido eliminar el fichero1, ya que todos los 
+usuarios del grupo tienen todos los permisos dentro de ese directorio.
+```bash
+vagrant@ubuntu2204:~$ sudo chmod +t /compartido
+vagrant@ubuntu2204:~$ ls -ld /compartido
+drwxrwxrwt 2 root root 4096 Oct 27  2024 /compartido
+```
+Vemos como se ha activado el Sticky bit, porque en los permisos del directorio
+se ha añadido la letra t que indica que el bit está habilitado
+```bash
+vagrant@ubuntu2204:~$ su - agg1
+Password:
+agg1@ubuntu2204:~$ cd /compartido
+agg1@ubuntu2204:/compartido$ touch fichero2
+agg1@ubuntu2204:/compartido$ echo "Vamos a comprobar ahora su funcionamiento" > fichero2
+
+agg1@ubuntu2204:/compartido$ su - agg2
+Password:
+agg2@ubuntu2204:~$ rm /compartido/fichero2
+rm: remove write-protected regular file '/compartido/fichero2'? y
+rm: cannot remove '/compartido/fichero2': Operation not permitted
+```
+Vemos ahora como cambiando el usuario "no" es posible la eliminación del fichero2
+PREGUNTAS:
+- ¿Qué efecto tiene el sticky bit en un directorio?: Se utiliza para evitar que usuarios con directorios compartidos puedan eliminar o renombrar archivos si no son propietarios de ellos o por supuesto el administrador
+- Si tienes habilitado el sticky bit, ¿cómo tendrías que hacer para eliminar un fichero dentro de un directorio?: siendo el administrador o el propietario del archivo
+
+
 
 
