@@ -217,7 +217,27 @@ Vemos ahora como cambiando el usuario "no" es posible la eliminación del ficher
 PREGUNTAS:
 - ¿Qué efecto tiene el sticky bit en un directorio?: Se utiliza para evitar que usuarios con directorios compartidos puedan eliminar o renombrar archivos si no son propietarios de ellos o por supuesto el administrador
 - Si tienes habilitado el sticky bit, ¿cómo tendrías que hacer para eliminar un fichero dentro de un directorio?: siendo el administrador o el propietario del archivo
-
-
+FICHERO /ETC/SHADOW
+Creamos un usuario con adduser y mostramos la línea del fichero /etc/shadow donde podemos ver el hash del usuario creado
+```bash
+vagrant@ubuntu2204:~$ sudo adduser agg
+vagrant@ubuntu2204:~$ sudo grep agg /etc/shadow
+agg:$y$j9T$f6b1X7kva2f5wTwVE3agQ.$Lz8F8wLNKiVSOJkIJYdXolZUreXkdxf/lIDU85fv7qC:20024:0:99999:7:::
+```
+¿Cuáles son los tipos de hash soportados por el fichero /etc/shadow?:
+- MD5: usa $1$ al principio
+- Blowfish: usa $2a$
+- Eksblowfish: $2y$
+- SHA-256: $5$
+- SHA-512: $6$
+¿Cuál es el tipo de hash usado en este sistema?: Revisando las respuestas de la cuestión anterior, podemos decir que es un Eksblowfish (aunque no tengamos el número 2), consultando en internet es un hash generado por un algoritmo bcrypt, el cual está diseñado para hacer más resistente el sistema a los ataques de fuerza bruta.
+¿Para que sirve el campo sal?: una sal de contraseña es un bit aleatorio de datos que se añade a la contraseña antes de pasarla por el algoritmo hash. Es diferente para cada usuario. Previene ataques de diccionario y tablas rainbow haciendo que para una misma contraseña se generen diferentes hashes.
+¿Qué son los ataques de diccionario y tablas rainbow?: Un ataque de diccionario es un método para intentar acceder a un sistema o un dispositivo protegidos por contraseña que consiste en ir probando combinaciones de palabras hasta dar con la contraseña correcta.
+Las tablas rainbow, son tablas que contienen hashes de contraseñas más o menos comunes y sus valores de texto plano. Esto facilita a un atacante buscar de forma fácil y rápida un hash y encontrar su contraseña original. Es como la gúía telefónica antigua pero con contraseñas y hashes.
+Para ver el hash de la contraseña asir2:
+```bash 
+vagrant@ubuntu2204:~$ echo -n asir2 |sudo sha512sum
+e5f11255a95fef13990981b3bdcce42671243f34e3aa88560027092715219dbed0b80e8639f91b71eea4d420a1dff683c1e5f613136241da2cd31d1e5fdc501a  -
+```
 
 
