@@ -31,7 +31,9 @@ Vagrant.configure("2") do |config|
 end
 ```
 Lo siguiente que debemos hacer es levantar la máquina con el comando “vagrant up”, de esta forma la máquina se inicia en VirtualBox con los datos dados.
+
 Para realizar la última parte (Tendrá el directorio /data de la máquina virtual sincronizado con una carpeta que crearás en el directorio donde está el Vagrantfile), primero creamos una carpeta en el directorio del ordenador donde está el Vagrantfile, como se muestra en la imagen anterior.
+
 Ejecutamos con la orden: vagrant up. 
 ```bash
 PS C:\GIT\aso_abgg\ut01\practicas\Pr01-01> vagrant ssh
