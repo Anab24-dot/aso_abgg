@@ -1,6 +1,7 @@
-REDES EN VAGRANT
+# REDES EN VAGRANT
 Creamos un Vagranfile para la creación de una máquina 
 con unas características dadas.
+
 ```bash
 Vagrant.configure("2") do |config|
   config.vm.box = "generic/ubuntu2204"
@@ -15,4 +16,9 @@ Vagrant.configure("2") do |config|
   end
 end
 ```
-Iniciamos 
+
+Iniciamos la máquina y entramos en el bash
+
+## Recursos adicionales
+[**Fichero Vagrantfile**](./Vagrantfile)
+
