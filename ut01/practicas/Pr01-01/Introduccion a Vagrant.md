@@ -1,11 +1,18 @@
-INTRODUCCIÓN A VAGRANT
-Objetivos:
+# INTRODUCCIÓN A VAGRANT
+
+## Objetivos:
+
 Preparar un proyecto Vagrant que permita levantar una máquina virtual con una serie de características
-Realización:
+
+## Realización:
+
 Descargamos un sistema operativo Ubuntu Server 20.04  de Vagrant Boxes, recurso dado en el módulo. Simplemente debemos escribir en la casilla de búsqueda el nombre del sistema operativo y luego descargarlo
 Una vez que seleccionamos el sistema operativo, podemos ver como en la parte derecha de la pantalla tenemos unas instrucciones de como usar “la caja” con Vagrant.
+
 En nuestra terminal escribimos  vagrant box add (control + v) para copiar el nombre de la imagen en este caso se corresponde con el nombre (gusztavvargadr/ubuntu-server-2004-lts)
+
 Comprobamos que tenemos el sistema operativo e inicializamos, de esta forma creamos un Vagrantfile,  desde donde podemos realizar modificaciones.
+
 Para cambiar el nombre de la máquina, debemos abrir el Vagrantfile y desde aquí, y debajo de la línea Vagrant.configure("2") do |config|.
 ```bash
 Vagrant.configure("2") do |config|
@@ -39,3 +46,6 @@ Entramos en la máquina virtual con: vagrant ssh
 vagrant@server-abgg:~$ 
 ```
 
+## Recursos adicionales
+
+[**Fichero Vagrantfile**](./Vagrantfile)
