@@ -229,6 +229,10 @@ En Github seleccionar Settings y en la zona izquierda de la pantalla, en la zona
 
 No realizo la tarea en este caso, porque no estoy segura de que al trabajar desde dos ordenadores diferentes, en redes distintas pueda trabajar con el repositorio en las mismas condiciones actuales
 
+## Recursos adicionales:
+[**Fichero Vagrantfile**](./Vagrantfile)
+
+
 
 
 
