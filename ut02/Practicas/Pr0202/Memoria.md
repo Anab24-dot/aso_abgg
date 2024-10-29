@@ -1,6 +1,7 @@
 # Práctica 0202
 
 ## Conexión remota con SSH
+### 1. Preparación de la máquina y configuración de la red
 
 Añadimos a nuestra caja de vagrant la nueva máquina virtual: ubuntu 2204
 Utilizamos el comando vagrant box add
@@ -90,6 +91,86 @@ PING 192.168.117.1 (192.168.117.1) 56(84) bytes of data.
 rtt min/avg/max/mdev = 0.838/1.297/1.643/0.237 ms
 ```
 
+Para cambiar el hostname de la máquina abrimos una terminal y utilizamos el comando hostnamectl:
+```bash
+vagrant@ubuntu2204:~$ sudo hostnamectl set-hostname a
+gg_server
+vagrant@ubuntu2204:~$ sudo hostnamectl
+ Static hostname: aggserver
+ Pretty hostname: agg_server
+       Icon name: computer-vm
+         Chassis: vm
+      Machine ID: a626621cad4e40a694106590139e8181
+         Boot ID: bd5dcb048ef94f44b3010c37487d8360
+  Virtualization: oracle
+Operating System: Ubuntu 22.04.3 LTS
+          Kernel: Linux 5.15.0-84-generic
+    Architecture: x86-64
+ Hardware Vendor: innotek GmbH
+  Hardware Model: VirtualBox
+```
+En windows vamos a realizar los cambios necesarios para que resuelva localmente el nombre del servidor Ubuntu
+
+Para ello abrimos el Bloc de notas como administrador. En Archivo desplegamos y seleccionar Abrir, desde aquí abrimos el archivo host, que se encuentra en:
+
+#### C\Windows\System32\Drivers\etc\hosts
+
+![alt text](image-2.png)
+
+Guardamos los cambios y cerramos el bloc de notas
+
+Para comprobar que ha funcionado, abrir el Símbolo del sistema y hacer un ping al nombre que hemos dado.
+
+![alt text](image-3.png)
+
+### 2. Creación del usuario y conexión ssh
+
+```bash
+vagrant@ubuntu2204:~$ sudo adduser agg_ssh
+Adding user `agg_ssh' ...
+Adding new group `agg_ssh' (1001) ...
+Adding new user `agg_ssh' (1001) with group `agg_ssh' ...
+Creating home directory `/home/agg_ssh' ...
+Copying files from `/etc/skel' ...
+New password: 
+```
+Comprobamos que tenemos instalado el servidor SSH
+
+```bash
+vagrant@ubuntu2204:~$ sudo service sshd status
+● ssh.service - OpenBSD Secure Shell server
+     Loaded: loaded (/lib/systemd/system/ssh.service; enabled; vendor preset: enabled)
+     Active: active (running) since Tue 2024-10-29 08:39:24 UTC; 26min ago
+       Docs: man:sshd(8)
+             man:sshd_config(5)
+   Main PID: 3166 (sshd)
+      Tasks: 1 (limit: 2220)
+```bash
+vagrant@ubuntu2204:~$ ls /etc/ssh
+moduli      ssh_config.d  sshd_config.d         ssh_host_ecdsa_key      ssh_host_ed25519_key      ssh_host_rsa_key      ssh_import_id
+ssh_config  sshd_config   sshd_config.ucf-dist  ssh_host_ecdsa_key.pub  ssh_host_ed25519_key.pub  ssh_host_rsa_key.pub
+```
+En el caso de que no fuera así, lo debemos instalar con el siguiente comando:
+
+sudo apt install openssh-server
+
+Vamos al Power Shell del anfitrión
+
+![alt text](image-4.png)
+Vemos que aparece un mensaje de seguridad, le decimos que sí queremos seguir conectados.
+
+![alt text](image-5.png)
+
+Queda de esta forma realizada la conexión por el puerto 22
+![alt text](image-6.png)
+
+Generar clave pública y privada desde el cliente:
+
+![alt text](image-7.png)
+
+Enviamos la clave pública al servidor, en este caso lo haremos de un equipo a otro con el comando "scp", que permite la trasmisión de ficheros entre dos equipos de la red.
+
+Nos situamos en la ruta donde se encuentran los archivos y ejecutamos el comando
 
 
 
