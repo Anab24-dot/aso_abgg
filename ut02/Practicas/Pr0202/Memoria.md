@@ -161,16 +161,75 @@ Vemos que aparece un mensaje de seguridad, le decimos que sí queremos seguir co
 
 ![alt text](image-5.png)
 
-Queda de esta forma realizada la conexión por el puerto 22
+Se solicita la contraseña 
+![alt text](image-8.png)
+
+Y una vez introducida ya tenemos la conexión realizada por el puerto 22
+
 ![alt text](image-6.png)
 
 Generar clave pública y privada desde el cliente:
 
-![alt text](image-7.png)
+![alt text](image-9.png)
 
 Enviamos la clave pública al servidor, en este caso lo haremos de un equipo a otro con el comando "scp", que permite la trasmisión de ficheros entre dos equipos de la red.
 
-Nos situamos en la ruta donde se encuentran los archivos y ejecutamos el comando
+Nos situamos en la ruta donde se encuentran los archivos y ejecutamos el comando. Se solicitará la contraseña para realizar la acción.
+
+![alt text](image-7.png)
+
+Iniciamos sesión en la máquina o desde Windows con el usuario creado, agg_ssh.
+
+Tenemos que mover la clave al directorio ssh, primero comprobamos si lo tenemos con el comando "ls -la"
+```bash
+agg_ssh@aggserver:/$ ls -la
+total 2097228
+drwxr-xr-x  19 root root       4096 Jan 11  2024 .
+drwxr-xr-x  19 root root       4096 Jan 11  2024 ..
+lrwxrwxrwx   1 root root          7 Aug 10  2023 bin -> usr/bin
+drwxr-xr-x   4 root root       4096 Jan 11  2024 boot
+drwxr-xr-x  19 root root       3980 Oct 29 16:12 dev
+drwxr-xr-x 102 root root       4096 Oct 29 16:33 etc
+drwxr-xr-x   4 root root       4096 Oct 29 16:33 home
+lrwxrwxrwx   1 root root          7 Aug 10  2023 lib -> usr/lib
+lrwxrwxrwx   1 root root          9 Aug 10  2023 lib32 -> usr/lib32
+lrwxrwxrwx   1 root root          9 Aug 10  2023 lib64 -> usr/lib64
+lrwxrwxrwx   1 root root         10 Aug 10  2023 libx32 -> usr/libx32
+drwx------   2 root root      16384 Jan 10  2024 lost+found
+drwxr-xr-x   2 root root       4096 Aug 10  2023 media
+drwxr-xr-x   2 root root       4096 Aug 10  2023 mnt
+drwxr-xr-x   2 root root       4096 Aug 10  2023 opt
+dr-xr-xr-x 169 root root          0 Oct 29 16:06 proc
+drwx------   5 root root       4096 Oct 29 16:35 root
+drwxr-xr-x  28 root root        860 Oct 29 17:11 run
+lrwxrwxrwx   1 root root          8 Aug 10  2023 sbin -> usr/sbin
+drwxr-xr-x   6 root root       4096 Oct 29 16:12 snap
+drwxr-xr-x   2 root root       4096 Aug 10  2023 srv
+-rw-------   1 root root 2147483648 Jan 10  2024 swap.img
+dr-xr-xr-x  13 root root          0 Oct 29 16:06 sys
+drwxrwxrwt  12 root root       4096 Oct 29 16:28 tmp
+drwxr-xr-x  14 root root       4096 Aug 10  2023 usr
+drwxr-xr-x  13 root root       4096 Aug 10  2023 var
+```
+Como vemos no tenemos el directorio, por lo que lo creamos. 
+
+Seguidamente copiamos la clave al directorio creado. Ejecutaremos el comando que se ve en la fotografía para evitar "machacar" lo que teníamos dentro.
+
+![alt text](image-10.png)
+
+En el PowerShell salimos de la máquina con exit y volvemos a entrar para comprobar si se solicita contraseña, o bien en su lugar, utiliza la clave pública para hacerlo. Como en este caso.
+
+![alt text](image-12.png)
+
+### Conexión transparente a Github
+
+En Github seleccionar Settings y en la zona izquierda de la pantalla, en la zona de Seguridad seleccionar Implementar Claves.
+
+![alt text](image-11.png)
+
+No realizo la tarea en este caso, porque no estoy segura de que al trabajar desde dos ordenadores diferentes, en redes distintas pueda trabajar con el repositorio en las mismas condiciones actuales
+
+
 
 
 
