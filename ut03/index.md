@@ -2,8 +2,8 @@
 
 [PR0301: Ejercicios con el comando if](./Practicas/PR0301/Memoria0301.md)
 
-[PR0302a: Ejercicios con case]
+[PR0302a: Ejercicios con case](./Practicas/PR0302a/Memoria0302a.md)
 
-[PR0302b: Ejercicios con el comando case]
+[PR0302b: Ejercicios con el comando case](./Practicas/PR0302b/Memoria0302b.md)
 
 [PR0302: Ejercicios de bucles y condicionales]
