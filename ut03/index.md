@@ -6,4 +6,6 @@
 
 [PR0302b: Ejercicios con el comando case](./Practicas/PR0302b/Memoria0302b.md)
 
-[PR0302: Ejercicios de bucles y condicionales]
+[PR0303: Ejercicios de bucles y condicionales](./Practicas/PR0303/Memoria0303.md)
+
+[PR0304: Ejercicios de entrada y salida](./Practicas/PR0304/Memoria0304.md)
