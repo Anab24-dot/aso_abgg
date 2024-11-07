@@ -67,6 +67,8 @@ for letra in $(echo $palabra | grep -o .);
   echo $letra
 done
 ```
+El comando grep -o hace que grep muestre solo las coincidencias exactas encontradas.
+El comando "grep -o ." busca cada caracter individual en el texto y lo imprime por separado. Cada caracter tiene su propia línea. 
 ```bash
 vagrant@ubuntu2204:~$ ./imprimir-letra.sh
 Escribe una palabra: night
