@@ -348,9 +348,13 @@ Adivina el número (1-100): 11
 ### - Archivo con nombres de directorios
 ```bash
 #!/bin/bash
-for dir in */; 
+ruta=$(pwd)
+for f in $ruta/; 
          do
-         echo $dir >> directorios.txt
+          if [ -d $f ]
+          then 
+          echo $f >> ./directorios.txt
+          fi
 done
 ```
 ```bash
