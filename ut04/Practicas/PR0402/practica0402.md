@@ -639,6 +639,15 @@ aemcentros True
 aemlocal   True
 Alumno     True
 ```
+```powershell
+PS C:\GIT\aso_abgg\ut04\Practicas\PR0402> Get-LocalUser | Where-Object -Property Enabled -eq $True
+
+Name       Enabled Description
+----       ------- -----------
+aemcentros True
+aemlocal   True
+Alumno     True
+```
 ### 18. Mostrar un listado de todos los usuarios del sistema con el nombre y la fecha de la última vez que iniciaron sesión 
 ```powershell
 PS C:\GIT\aso_abgg\ut04\Practicas\PR0402> Get-LocalUser | Get-Member                               
