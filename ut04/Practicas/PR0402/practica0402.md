@@ -511,4 +511,174 @@ svchost ...2 01/12/... 00:00:00           Normal
 svchost ...4 01/12/... 00:00:00.2031250   Normal
 svchost ...2
 ```
-### 15. 
+### 15. Repetir la búsqueda anterior, pero ordenando por el campo tiempo total del procesador en sentido descendente
+```powershell
+PS C:\GIT\aso_abgg\ut04\Practicas\PR0402> Get-Process svchost | Select-Object Name, Id, StartTime, TotalProcessorTime, PriorityClass | Sort-Object TotalProcessorTime -Descending | Format-Table -AutoSize
+
+Name       Id StartTime          TotalProcessorTime PriorityClass
+----       -- ---------          ------------------ -------------
+svchost  2176 02/12/2024 8:41:11 00:00:00.2031250          Normal
+svchost  8496 02/12/2024 8:42:14 00:00:00.1406250          Normal
+svchost  7672 02/12/2024 8:41:11 00:00:00.0625000          Normal
+svchost 10944 02/12/2024 8:41:12 00:00:00.0468750          Normal
+svchost 11852 02/12/2024 8:41:12 00:00:00.0156250          Normal
+svchost  2380 02/12/2024 8:46:13 00:00:00.0156250          Normal
+svchost  9368 02/12/2024 8:41:11 00:00:00                  Normal
+svchost 11016 02/12/2024 8:46:13 00:00:00                  Normal
+svchost  6412
+svchost  6404
+svchost  6720
+svchost  6804
+svchost  6452
+svchost  6696
+svchost  5816
+svchost  6032
+svchost  5748
+svchost  5448
+svchost  5604
+svchost  6296
+svchost  6388
+svchost  5228
+svchost  6080
+svchost  6220
+svchost 12696
+svchost 12960
+svchost 11744
+svchost 12428
+svchost 17156
+svchost 18672
+svchost 15192
+svchost 17120
+svchost  9224
+svchost  9256
+svchost  6828
+svchost  9128
+svchost 10280
+svchost 10504
+svchost  9968
+svchost 10144
+svchost  2200
+svchost  2208
+svchost  2100
+svchost  2192
+svchost  2244
+svchost  2488
+svchost  2604
+svchost  2448
+svchost  2456
+svchost  2056
+svchost  1560
+svchost  1684
+svchost   856
+svchost  1380
+svchost  1736
+svchost  2032
+svchost  2040
+svchost  1960
+svchost  2024
+svchost  3876
+svchost  3884
+svchost  3860
+svchost  3864
+svchost  4112
+svchost  4656
+svchost  4960
+svchost  4328
+svchost  4592
+svchost  3808
+svchost  3188
+svchost  3280
+svchost  2852
+svchost  3092
+svchost  3340
+svchost  3656
+svchost  3668
+svchost  3520
+svchost  3652
+```
+### 16. Mostrar los usuarios que hay en el sistema agrupándolos por la propiedad Enabled
+```powershell
+PS C:\GIT\aso_abgg\ut04\Practicas\PR0402> Get-LocalUser | Select-Object -property Enabled             
+
+Enabled
+-------
+  False
+   True
+   True
+   True
+  False
+  False
+  False
+```
+```powershell
+PS C:\GIT\aso_abgg\ut04\Practicas\PR0402> (Get-LocalUser).Enabled
+False
+True
+True
+True
+False
+False
+False
+```
+```powershell
+PS C:\GIT\aso_abgg\ut04\Practicas\PR0402> Get-LocalUser | Group-Object -Property enabled      
+
+Count Name                      Group
+----- ----                      -----
+    4 False                     {Administrador, DefaultAccount,... 
+    3 True                      {aemcentros, aemlocal, Alumno}     
+
+```
+### 17. Mostrar los usuarios que hay en el sistema con la cuenta habilitada (propiedad Enabled puesta a True). Utilizar el filtrado con el comando Where-Object
+```powershell
+PS C:\GIT\aso_abgg\ut04\Practicas\PR0402> Get-LocalUser | Where-Object -Property Enabled -eq "True"
+
+Name       Enabled Description
+----       ------- -----------
+aemcentros True
+aemlocal   True
+Alumno     True
+```
+### 18. Mostrar un listado de todos los usuarios del sistema con el nombre y la fecha de la última vez que iniciaron sesión 
+```powershell
+PS C:\GIT\aso_abgg\ut04\Practicas\PR0402> Get-LocalUser | Get-Member                               
+
+
+   TypeName: Microsoft.PowerShell.Commands.LocalUser
+
+Name                   MemberType Definition
+----                   ---------- ----------
+Clone                  Method     Microsoft.PowerShell.Command... 
+Equals                 Method     bool Equals(System.Object obj)  
+GetHashCode            Method     int GetHashCode()
+GetType                Method     type GetType()
+ToString               Method     string ToString()
+AccountExpires         Property   System.Nullable[datetime] Ac... 
+Description            Property   string Description {get;set;}   
+Enabled                Property   bool Enabled {get;set;}
+FullName               Property   string FullName {get;set;}      
+LastLogon              Property   System.Nullable[datetime] La... 
+Name                   Property   string Name {get;set;}
+ObjectClass            Property   string ObjectClass {get;set;}   
+PasswordChangeableDate Property   System.Nullable[datetime] Pa... 
+PasswordExpires        Property   System.Nullable[datetime] Pa... 
+PasswordLastSet        Property   System.Nullable[datetime] Pa... 
+PasswordRequired       Property   bool PasswordRequired {get;s... 
+PrincipalSource        Property   System.Nullable[Microsoft.Po... 
+SID                    Property   System.Security.Principal.Se... 
+UserMayChangePassword  Property   bool UserMayChangePassword {... 
+```
+```powershell
+PS C:\GIT\aso_abgg\ut04\Practicas\PR0402> Get-LocalUser | Select-Object Name, LastLogon
+
+Name               LastLogon
+----               ---------
+Administrador      27/12/2023 9:38:50
+aemcentros         15/04/2024 9:14:59
+aemlocal           17/04/2024 11:20:46
+Alumno             02/12/2024 11:48:37
+DefaultAccount
+Invitado
+WDAGUtilityAccount
+```
+
