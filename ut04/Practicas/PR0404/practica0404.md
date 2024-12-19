@@ -30,3 +30,27 @@
 ### -Asegúrate de que sigas pudiendo administrar el otro equipo en modo Core
 ### -Para comprobarlo, crear de forma remota en ambos equipos en modo Core un usuario con privilegios de administrador llamado AGG. 
 ![alt text](image-12.png)
+### 4. Configuración del acceso remoto sobre HTTPS. 
+![alt text](image-13.png)
+#### Como se ve en la imagen anterior, al ejecutar el comando Set-Item dos veces lo que se hace es sobreescribir la ip en la que se puede confiar. Por tanto, o bien ponemos una coma para poder escribir las dos IPs como en la imagen inferior. 
+![alt text](image-14.png)
+#### O bien, lo añadimos como se muestra en la diapositiva número 15.
+![alt text](image-15.png)
+![alt text](image-16.png)
+#### Una vez comprobado que está todo bien configurado es el momento de asegurar la red preparándola para que utilice WinRM sobre HTTPS utilizando un certificado autofirmado. 
+![alt text](image-17.png)
+#### Eliminamos el Listener HTTP (este paso es opcional)
+![alt text](image-18.png)
+#### Creamos un nuevo Listener para ese certificado
+![alt text](image-19.png)
+#### Nos aseguramos de que el puerto 5986 esté abierto en el firewall
+![alt text](image-20.png)
+#### Comprobamos la configuración del Listener
+![alt text](image-21.png)
+#### Vamos a exportar el certificado para poder conectarnos por HTTPS
+![alt text](image-22.png)
+#### Creamos una carpeta compartida en Server 2019 con entorno gráfico y enviamos allí el certificado.
+
+#### Realizar los pasos necesarios para que la comunicación con ambos servidores use ese mecanismo
+
+### 5. Configurar los equipos para poder administrarlos de forma remota utilizando Windows Admin Center desde el equipo con entorno gráfico.
