@@ -26,4 +26,18 @@
 #### 2. Utilizando la herramienta Servicios de archivos y de almacenamiento del Administrador del servidor, crear una carpeta para cada usuario dentro de C:\shares y realizar los pasos necesarios para que ambos usuarios puedan ver esta carpeta como una unidad de red identificada con la letra H:
 ###### El Servicio de archivos y almacenamiento se encuentra en la ventana principal de Active Directori (en la izquierda de la pantalla)
 ![alt text](image-13.png)
+###### Seleccionar la pestaña Recursos compartidos y en el panel central en cualquier espacio en blanco clicamos con el botón derecho y seleccionar "Nuevo recurso compartido"
+![alt text](image-14.png)
+![alt text](image-15.png)
+![alt text](image-16.png)
+![alt text](image-17.png)
+###### Si al escribir el nombre, este lo terminamos con $ nos garantiza que el nombre de la carpeta esté oculto
+![alt text](image-18.png)
+![alt text](image-19.png)
+###### Marcamos en Seleccionar una entidad de seguridad para agregar el grupo
+![alt text](image-20.png)
+![alt text](image-21.png)
+###### Clicamos "siguiente" hasta el final para Crear la carpeta
+![alt text](image-22.png)
+
 #### 3. Comprobar que la carpeta de cada usuario solo puede ser accedida por él mismo
